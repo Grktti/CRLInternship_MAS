@@ -30,10 +30,10 @@ int main(){
         std::vector<int> a{2,9,4,1,7};
         std::cout << "max=" << maxOf(a)
                   << ", mean=" << meanOf(a)
-                  << ", median=" << medianOf(a) << "\n"; // => 9, 4.6, 4
+                  << ", median=" << medianOf(a) << "\n";
     }
     {
         std::vector<int> b{1,2,3,4};
-        std::cout << "median(b)=" << medianOf(b) << "\n"; // => 2.5
+        std::cout << "median(b)=" << medianOf(b) << "\n";
     }
 }
