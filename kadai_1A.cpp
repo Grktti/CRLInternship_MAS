@@ -1,19 +1,12 @@
+//
+// Created by rikuo on 25/08/17.
+//
 #include <iostream>
 #include <string>
 
 std::string renderGrid(int W, int H) {
-    // TODO: 文字列バッファを作って for で埋める
-    if (W <= 1 || H <= 1) return ""; // 最低限のサイズチェック
-    std::string buf;
-    buf.reserve(static_cast<size_t>((W + 1) * H));
-    for (int y = 0; y < H; ++y) {
-        for (int x = 0; x < W; ++x) {
-            bool border = (x == 0 || y == 0 || x == W - 1 || y == H - 1);
-            buf.push_back(border ? '#' : '?');
-        }
-        buf.push_back('\n');
-    }
-    return buf;
+    // TODO: バッファを用意して、外周'#'、内部'?'を for で埋める
+
 }
 
 int main(){

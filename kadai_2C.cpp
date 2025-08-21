@@ -1,7 +1,6 @@
-// ------------------------------------------------------------
-// Boids with mass-damper (no external input u)
-// Agent: a->v->p integrate, Renderer: draw, main: loop
-// ------------------------------------------------------------
+//
+// Created by rikuo on 25/08/17.
+//
 #include <GLFW/glfw3.h>
 #include <vector>
 #include <cmath>
@@ -48,53 +47,27 @@ public:
         Vec2 u_a{0,0};
         Vec2 u_wall{0,0};
 
-        // --- Boids: 近傍統計 ---
-        Vec2 v_avg{0,0}, p_avg{0,0};
-        int cnt = 0;
-        for (const auto& o : all) {
-            if (&o == this) continue;
-            Vec2 rij = o.p_ - p_;
-            float d = norm(rij);
-            if (d < viewRad_) {
-                if (d > 1e-4f) {
-                    float overlap = viewRad_ - d;
-                    // 分離（反発）：相手と逆向き
-                    u_s -= normalize(rij) * (k_sep_ * overlap / (d + 1e-3f));
-                }
-                v_avg += o.v_;
-                p_avg += o.p_;
-                ++cnt;
-            }
-        }
-        if (cnt > 0) {
-            v_avg = v_avg * (1.0f/cnt);
-            p_avg = p_avg * (1.0f/cnt);
-            u_a += (v_avg - v_) * k_ali_;   // 整列
-            u_c += (p_avg - p_) * k_coh_;   // 凝集
-        }
+        // TODO Boidsを実装
 
 
         Vec2 u_ran = randomForce(30.f)* k_ran_;  // strength=30
 
 
         // --- 壁：やわらかバネで内側へ ---
-        const float margin = 10.f;
-        if (p_.x < margin)        u_wall.x += k_wall_ * (margin - p_.x);
-        if (p_.x > worldW-margin) u_wall.x -= k_wall_ * (p_.x - (worldW-margin));
-        if (p_.y < margin)        u_wall.y += k_wall_ * (margin - p_.y);
-        if (p_.y > worldH-margin) u_wall.y -= k_wall_ * (p_.y - (worldH-margin));
+        // TODO 壁からの反発を計算
 
         //要素の合成
         Vec2 F_boids = u_s + u_a + u_c + u_wall + u_ran;
 
-        // --- マスダンパ系から加速度を計算： a = (F - D v)/M ---
-        a_ = (F_boids - v_ * D_) * (1.0f / M_);
+        // TODO マスダンパ系から加速度の計算
+        a_ =
         clipAce(a_, Amax_);
 
-        // --- 半陰的オイラー（安定）： v ← v + a dt, p ← p + v dt ---
-        v_ += a_ * dt;
+        // TODO 積分して速度計算
+        v_ =
         clipVec(v_, Vmax_);
-        p_ += v_ * dt;
+        // TODO 積分して位置計算
+        p_ =
 
         // --- 画面内にクランプ（半径ぶん内側） ---
         if (p_.x < radius_)   p_.x = radius_;
@@ -122,6 +95,7 @@ private:
     float D_ = 1.0f;   // 粘性係数（減衰）
 
     // Boids ゲイン
+    // todo 必要ならゲインは変えてOK
     float k_sep_  = 4.f;
     float k_ali_  = 10.f;
     float k_coh_  = 2.f;
@@ -201,8 +175,8 @@ private:
 // ③ main：サンプリング・台数・領域・ループ
 // ============================================================
 int main(){
-    const int   W   = 1000;
-    const int   H   = 1000;
+    const int   W   = 500;
+    const int   H   = 500;
     const int   N   = 10;     // エージェント台数
     const float R   = 5.f;    // 半径
     const float VR  = 200.f;  // 視野半径

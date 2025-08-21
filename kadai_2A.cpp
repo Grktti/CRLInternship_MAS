@@ -1,23 +1,23 @@
+//
+// Created by rikuo on 25/08/17.
+//
 #include <iostream>
-
-
 class Ball {
 public:
     float x, y;   // 座標
     float vx, vy; // 速度
 
+
     Ball(float _x, float _y, float _vx, float _vy) {
-        x = _x; y = _y;
-        vx = _vx; vy = _vy;
+        // TODO: メンバ初期化（x,y,vx,vy を引数から代入）
     }
 
     void update() {
-        x += vx;
-        y += vy;
+        // TODO: 1ステップの更新
     }
 
     void print() {
-        std::cout << "(" << x << "," << y << ")" << std::endl;
+        // TODO: 現在位置を "(x,y)" 形式で出力
     }
 };
 

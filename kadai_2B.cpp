@@ -1,3 +1,6 @@
+//
+// Created by rikuo on 25/08/17.
+//
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include <iostream>
@@ -15,23 +18,11 @@ public:
         : x(_x), y(_y), vx(_vx), vy(_vy) {}
 
     void update(float dt, float width, float height) {
-        x += vx * dt * 100; // ← 速度にdtを掛ける（100はスケール調整）
-        y += vy * dt * 100;
-
-        // 壁で反射
-        if (x < 0 || x > width) vx = -vx;
-        if (y < 0 || y > height) vy = -vy;
+        // TODO: 位置の更新＋ 壁で反射（幅/高さで判定）
     }
 
     void draw() {
-        glBegin(GL_TRIANGLE_FAN);
-        glVertex2f(x, y); // 中心
-        int segments = 20;
-        for (int i = 0; i <= segments; i++) {
-            float theta = 2 * M_PI * i / segments;
-            glVertex2f(x + r * cos(theta), y + r * sin(theta));
-        }
-        glEnd();
+        // TODO: 円の描画（GL_TRIANGLE_FAN で中心＋周辺点をぐるっと）
     }
 };
 
@@ -49,7 +40,8 @@ int main() {
     glOrtho(0, width, height, 0, -1, 1);
     glMatrixMode(GL_MODELVIEW);
 
-    Ball ball(500, 500, 1, 1); // 中心から動き出すボール
+    // TODO ボールの初期化
+
 
     // サンプリングタイム（秒）
     const double dt = 0.01; // 10msごとに更新
@@ -61,8 +53,7 @@ int main() {
         std::chrono::duration<double> elapsed = now - prev;
         prev = now;
 
-        // モデル更新
-        ball.update(elapsed.count(), width, height);
+        // TODO ボールの更新
 
         // 描画
         glClearColor(1, 1, 1, 1); // 白背景
