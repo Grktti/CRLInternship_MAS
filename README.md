@@ -59,7 +59,7 @@
 
 ---
 
-## 3. ビルドと実行（Windows）
+## 3. ビルドと実行
 
 ### Visual Studio
 1. **ソリューションを新規作成**
@@ -87,6 +87,23 @@
   find_package(glfw3 CONFIG REQUIRED)
   target_link_libraries(kadai_2B PRIVATE glfw)
   ```
+
+### macOS
+#### Homebrew と GLFW のインストール
+1. Homebrew をインストール
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+2. インストール後に表示されるコマンドを実行  
+   （例：`xxxx` の部分は自分のユーザー名）
+   ```bash
+   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/xxxx/.zprofile
+   eval "$(/opt/homebrew/bin/brew shellenv)"
+   ```
+3. GLFW をインストール
+   ```bash
+   brew install glfw3
+   ```
 
 ---
 

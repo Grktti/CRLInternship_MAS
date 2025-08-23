@@ -39,7 +39,7 @@ public:
         return Vec2{ std::cos(ang), std::sin(ang) } * strength;
     }
 
-    // マスダンパ系： M a + D v = F_boids + F_wall
+
     void drive(float dt, const std::vector<Agent>& all, float worldW, float worldH)
     {
         Vec2 u_s{0,0};
@@ -59,7 +59,7 @@ public:
         //要素の合成
         Vec2 F_boids = u_s + u_a + u_c + u_wall + u_ran;
 
-        // TODO マスダンパ系から加速度の計算
+        // TODO マスダンパ系で加速度の計算
         a_ =
         clipAce(a_, Amax_);
 
@@ -205,7 +205,7 @@ int main(){
         const std::vector<Agent> snap = agents;       // 同時刻参照
 
         for (auto& a : agents) {
-            a.drive((float)dt, snap, (float)W, (float)H); // ★uは使わない
+            a.drive((float)dt, snap, (float)W, (float)H);
         }
 
         renderer.beginFrame();
