@@ -77,7 +77,7 @@
 3. 右上の実行ボタンから Run
 
 ### OpenGL を使う課題 (2B, 2C)
-- **GLFW のインストールは不要**  
+- **GLFW のインストール(本課題では不要)**  
   vcpkg を使う場合の例:
   ```powershell
   vcpkg install glfw3
